@@ -4,7 +4,7 @@ A tool to detect `SCAM` object in Sui.
 
 ## Workflow
 
-```
+```mermaid
 flowchart TB
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
