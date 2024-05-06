@@ -6,11 +6,6 @@ A tool to detect `SCAM` object in Sui.
 
 ```mermaid
 flowchart TB
-A[Hard] -->|Text| B(Round)
-B --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-
 A[Object ID] --> B[Object data]
 B --> C{Own Object?}
 C -->|yes| D{Coin or NFT}
