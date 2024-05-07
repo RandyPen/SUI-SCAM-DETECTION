@@ -33,3 +33,9 @@ Prompts in `gpt.py`.
 ## Run
 
 See `process.py`.
+
+
+## Future test features
+- [ ] visual model to analyze image
+- [ ] (optional) llama3
+- [ ] (optional) [coze](https://www.coze.com/)
