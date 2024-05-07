@@ -57,6 +57,22 @@ class Processor():
         result = self.client.execute_query_node(with_node=qn.GetCoinMetaData(coin_type=object_type))
         return result if result.is_ok() else None
     
+    def get_object_display_info(self, object_id: str) -> None:
+        """Fetch specific object data."""
+        QUERY = """
+        query Object {
+            object(address: \"""" + object_id + """\") {
+                display {
+                key 
+                value
+                error
+                }
+            }
+        }
+        """
+        result = self.client.execute_query_string(string=QUERY)
+        return result if result.is_ok() else None
+    
     def parse(self, result: SuiRpcResult):
         data = result.result_data
         try:
@@ -64,7 +80,7 @@ class Processor():
             if isinstance(object_owner, sui_object_not_own_types):
                 # print(object_owner)
                 return
-        except AttributeError:
+        except AttributeError: # for kiosk object
             return
         
         content = data.content
@@ -88,7 +104,8 @@ class Processor():
             print("Not Coin")
             if object_type in self.object_white_list:
                 return
-            feature = "content: " + str(content) # will add description after pysui support
+            display_info = self.get_object_display_info(object_id)
+            feature = "content: " + str(content) + str(display_info)
             result = self.judger.judge_object(feature)
             print(result)
             if result == "SCAM" and object_type not in self.object_block_list:
