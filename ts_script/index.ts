@@ -40,12 +40,14 @@ app.use(
                   console.log("body:", body);
                   // At this point, `body` has the entire request payload stored in it as a string
                 });
-        console.log('```````````````````````````````````````')
-        proxyReq.setHeader('Access-Control-Allow-Origin','*')
+        proxyReq.setHeader('Access-Control-Allow-Origin','*');
+        
         //console.log(req.headers);
       },
       proxyRes: (proxyRes, req, res) => {
         /* handle proxyRes */
+        proxyRes.headers["access-control-allow-headers"] = "*";
+
       },
       error: (err, req, res) => {
         /* handle error */
